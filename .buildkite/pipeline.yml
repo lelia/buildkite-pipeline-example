@@ -1,3 +1,8 @@
+# Buildkite pipeline for: https://github.com/lelia/buildkite-pipeline-example
+#
+# Note: This pipeline stores its common configuration in the `preflight` directory
+
+# Define the main pipeline steps
 steps:
   # Compile the go program and upload the build as an artifact
   - label: ":hammer_and_wrench: build + upload"
