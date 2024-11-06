@@ -1,20 +1,20 @@
-# Set top-level queue for linux-ec2 agent
-agents:
-  queue: "linux-ec2"
+# # Set top-level queue for linux-ec2 agent
+# agents:
+#   queue: "linux-ec2"
 
-# Define common environment variables
-env:
-  GO_IMAGE: "golang:1.18.10"
-  HELLO_APP: "hello/hello"
-  NAME_INPUT: "$(buildkite-agent meta-data get name-input)"
-  TEST_RESULTS: "junit.xml"
+# # Define common environment variables
+# env:
+#   GO_IMAGE: "golang:1.18.10"
+#   HELLO_APP: "hello/hello"
+#   NAME_INPUT: "$(buildkite-agent meta-data get name-input)"
+#   TEST_RESULTS: "junit.xml"
 
-# Add YAML anchor for Docker plugin logic
-docker: &docker
-  docker#v5.11.0:
-    image: ${GO_IMAGE}
-    mount-buildkite-agent: true
-    propagate-environment: true
+# # Add YAML anchor for Docker plugin logic
+# docker: &docker
+#   docker#v5.11.0:
+#     image: ${GO_IMAGE}
+#     mount-buildkite-agent: true
+#     propagate-environment: true
 
 # Define the Buildkite pipeline steps
 steps:
@@ -23,8 +23,6 @@ steps:
     key: "build-upload"
     command: |
       go build -o ${HELLO_APP} ${HELLO_APP}.go
-      chmod +x ./${HELLO_APP}
-      ./${HELLO_APP} "Lelia"
     plugins:
       - artifacts#v1.9.4:
           upload: "${HELLO_APP}"
