@@ -3,11 +3,11 @@ agents:
   queue: "linux-ec2"
 
 # Define common environment variables
-# env:
-#   GO_IMAGE: "golang:1.18.10"
-#   HELLO_APP: "hello/hello"
-#   NAME_INPUT: "$(buildkite-agent meta-data get name-input)"
-#   TEST_RESULTS: "junit.xml"
+env:
+  GO_IMAGE: "golang:1.18.10"
+  HELLO_APP: "hello/hello"
+  NAME_INPUT: "$(buildkite-agent meta-data get name-input)"
+  TEST_RESULTS: "junit.xml"
 
 common:
   - docker: &docker
