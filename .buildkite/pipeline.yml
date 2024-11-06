@@ -24,9 +24,9 @@ steps:
         key: "name-input"
         default: "Lelia"
 
-  # Pass user input to unit tests and upload the results as an artifact
-  - label: ":golang: unit tests"
-    key: "unit-tests"
+  # Pass user input to golang tests and upload the results as an artifact
+  - label: ":golang: golang tests"
+    key: "golang-tests"
     depends_on: "input-block"
     command: |
       go install gotest.tools/gotestsum@v1.12.0
@@ -36,8 +36,13 @@ steps:
           upload: "${TEST_RESULTS}"
       - *docker
 
-  # TODO: Annotate BK pipeline with unit test results
-  # - label: ":junit: annotate build"
+  # Annotate the pipeline with golang test results
+  - label: ":junit: annotate pipeline"
+    key: "junit-annotate"
+    depends_on: "golang-tests"
+    plugins:
+      - junit-annotate#v2.5.0:
+          artifacts: "${TEST_RESULTS}"
 
   # Download artifact and pass user input to execute the program
   - label: ":rocket: execute program"
