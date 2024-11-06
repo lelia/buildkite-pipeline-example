@@ -3,7 +3,7 @@
 # Note: This pipeline stores its common configuration in the `preflight` directory
 
 # Define the main pipeline steps
-steps:
+steps
   # Compile the go program and upload the build as an artifact
   - label: ":hammer_and_wrench: build + upload"
     key: "build-upload"
@@ -25,25 +25,25 @@ steps:
         key: "name-input"
         default: "Lelia"
   
-  # # Pass user input to unit tests and upload the results as an artifact
-  # - label: ":golang: unit tests"
-  #   key: "unit-tests"
-  #   depends_on: "input-block"
-  #   command: |
-  #     go install gotest.tools/gotestsum@v1.12.0
-  #     gotestsum --junitfile ${TEST_RESULTS}
-  #   env:
-  #     TEST_DIRECTORY: "hello"
-  #   plugins:
-  #     - artifacts#v1.9.4:
-  #       upload: "${TEST_RESULTS}"
-  #       s3-upload-acl: public-read
-  #     - *docker
+  # Pass user input to unit tests and upload the results as an artifact
+  - label: ":golang: unit tests"
+    key: "unit-tests"
+    depends_on: "input-block"
+    command: |
+      go install gotest.tools/gotestsum@v1.12.0
+      gotestsum --junitfile ${TEST_RESULTS}
+    env:
+      TEST_DIRECTORY: "hello"
+    plugins:
+      - artifacts#v1.9.4:
+          upload: "${TEST_RESULTS}"
+          s3-upload-acl: public-read
+      - *docker
 
   # TODO: Annotate BK pipeline with unit test results
   # - label: ":junit: annotate build"
 
-  # Download program artifact and pass user input to execute
+  # Download artifact and pass user input to execute the program
   - label: ":rocket: execute program"
     key: "run-app"
     depends_on: "input-block"
