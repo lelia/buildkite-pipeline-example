@@ -37,19 +37,20 @@ steps:
   #   plugins:
   #     - artifacts#v1.9.4:
   #       upload: "${TEST_RESULTS}"
+  #       s3-upload-acl: public-read
   #     - *docker
 
-  # # TODO: Annotate BK pipeline with unit test results
-  # # - label: ":junit: annotate build"
+  # TODO: Annotate BK pipeline with unit test results
+  # - label: ":junit: annotate build"
 
-  # # Download program artifact and pass user input to execute
-  # - label: ":rocket: execute program"
-  #   key: "run-app"
-  #   depends_on: "input-block"
-  #   command: |
-  #     chmod +x ./${HELLO_APP}
-  #     ./${HELLO_APP} ${NAME_INPUT}
-  #   plugins:
-  #     - artifacts#v1.9.4:
-  #       download: "${HELLO_APP}"
-  #     - *docker
+  # Download program artifact and pass user input to execute
+  - label: ":rocket: execute program"
+    key: "run-app"
+    depends_on: "input-block"
+    command: |
+      chmod +x ./${HELLO_APP}
+      ./${HELLO_APP} ${NAME_INPUT}
+    plugins:
+      - artifacts#v1.9.4:
+        download: "${HELLO_APP}"
+      - *docker
