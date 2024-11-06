@@ -35,6 +35,7 @@ steps:
       - test-collector#v1.10.2:
           files: "${TEST_RESULTS}"
           format: "junit"
+          api-token-env-name: "$$BUILDKITE_ANALYTICS_TOKEN"
       - artifacts#v1.9.4:
           upload: "${TEST_RESULTS}"
       - *docker
@@ -66,7 +67,7 @@ steps:
     command: |
       cat << EOF | buildkite-agent annotate --style "success"
         :wave: Hello, <b>${NAME_INPUT}</b>! Mission accomplished :tada:
-        <p><p><br>:artifactory: Some noteworthy artifacts:<br>
+        <br>:artifactory: Some noteworthy artifacts:
         * <b><a href="artifact://${HELLO_APP}">Hello program binary</a></b>
         * <b><a href="artifact://${TEST_RESULTS}">Golang test results</a></b>
       EOF
