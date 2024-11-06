@@ -58,7 +58,9 @@ steps:
 # Annotate pipeline after program successfully executes
   - label: ":buildkite: annotate pipeline"
     key: "pipeline-annotate"
-    depends_on: "run-app"
+    depends_on:
+      - "golang-tests"
+      - "run-app"
     command: |
       cat << EOF | buildkite-agent annotate --style "success"
         :wave: Hello, <b>${NAME_INPUT}</b>! Mission accomplished :tada:<br />
