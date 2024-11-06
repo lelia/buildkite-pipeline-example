@@ -66,7 +66,7 @@ steps:
     command: |
       cat << EOF | buildkite-agent annotate --style "success"
         :wave: Hello, <b>${NAME_INPUT}</b>! Mission accomplished :tada:
-        <p><p> :artifactory: Some noteworthy artifacts:
+        <p><p><br>:artifactory: Some noteworthy artifacts:<br>
         * <b><a href="artifact://${HELLO_APP}">Hello program binary</a></b>
         * <b><a href="artifact://${TEST_RESULTS}">Golang test results</a></b>
       EOF
