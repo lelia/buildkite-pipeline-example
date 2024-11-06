@@ -19,3 +19,18 @@ $ ./hello/hello John Doe
 ```
 
 The above will return 'Hello, John Doe!'
+
+## Test the project
+
+You can run unit tests for the application using go test:
+
+```bash
+$ cd hello
+$ go test
+```
+
+## Run the pipeline
+
+The Buildkite pipeline for this project is available here: https://buildkite.com/lelia/buildkite-pipeline-example
+
+The pipeline contents are generated from `.buildkite/pipeline.yml` and `preflight/preflight.yml` using the `preflight/upload` script.
