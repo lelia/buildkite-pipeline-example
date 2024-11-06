@@ -35,7 +35,6 @@ steps:
       - test-collector#v1.10.2:
           files: "${TEST_RESULTS}"
           format: "junit"
-          api-token-env-name: "$$BUILDKITE_ANALYTICS_TOKEN"
       - artifacts#v1.9.4:
           upload: "${TEST_RESULTS}"
       - *docker
