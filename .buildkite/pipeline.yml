@@ -40,6 +40,8 @@ steps:
   - label: ":junit: annotate pipeline"
     key: "junit-annotate"
     depends_on: "golang-tests"
+    command: |
+      cat "${TEST_RESULTS}" | buildkite-agent annotate --style "success"
     plugins:
       - junit-annotate#v2.5.0:
           artifacts: "${TEST_RESULTS}"
