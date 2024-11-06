@@ -60,12 +60,20 @@ steps:
   - label: ":buildkite: annotate pipeline"
     key: "pipeline-annotate"
     depends_on: "run-app"
+    if: $$(buildkite-agent step get "outcome" --step "run-app") == "passed"
     command: |
-      if [ $$(buildkite-agent step get "outcome" --step "run-app") == "passed" ]; then
-        cat <<- EOF | buildkite-agent annotate --style "success"
-          :wave: Hello, ${NAME_INPUT}! Mission accomplished :tada:
-          <br> :package: Noteworthy artifacts:
-          * <b><a href="artifact://${TEST_RESULTS}">Golang test results</a></b>
-          * <b><a href="artifact://${HELLO_APP}">Hello program binary</a></b>
-        EOF
-      fi
+      cat << EOF | buildkite-agent annotate --style "success"
+        :wave: Hello, ${NAME_INPUT}! Mission accomplished :tada:
+        <br> :package: Noteworthy artifacts:
+        * <b><a href="artifact://${TEST_RESULTS}">Golang test results</a></b>
+        * <b><a href="artifact://${HELLO_APP}">Hello program binary</a></b>
+      EOF
+    # command: |
+    #   if [ $$(buildkite-agent step get "outcome" --step "run-app") == "passed" ]; then
+    #     cat <<- EOF | buildkite-agent annotate --style "success"
+    #       :wave: Hello, ${NAME_INPUT}! Mission accomplished :tada:
+    #       <br> :package: Noteworthy artifacts:
+    #       * <b><a href="artifact://${TEST_RESULTS}">Golang test results</a></b>
+    #       * <b><a href="artifact://${HELLO_APP}">Hello program binary</a></b>
+    #     EOF
+    #   fi
