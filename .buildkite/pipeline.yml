@@ -29,7 +29,7 @@ steps:
   - label: ":hammer_and_wrench: build + upload"
     key: "build-upload"
     command: |
-      go build -o hello/hello hello/hello.go
+      go build -o $HELLO_APP hello/hello.go
       chmod +x ./hello/hello
       ./hello/hello "Lelia"
     # go build -o ${HELLO_APP} ${HELLO_APP}.go
