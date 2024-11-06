@@ -28,7 +28,7 @@ steps:
       - artifacts#v1.9.4:
         # upload: "${HELLO_APP}"
         upload: $$HELLO_APP
-      - *docker
+      *docker
 
   # # Block the build to require manual user input before proceeding
   # - block: ":name_badge: input name"
