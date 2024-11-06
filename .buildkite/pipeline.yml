@@ -32,9 +32,9 @@ steps:
       go build -o hello/hello hello/hello.go
     # go build -o ${HELLO_APP} ${HELLO_APP}.go
     plugins:
-      - artifacts#v1.9.4:
-        # upload: "${HELLO_APP}"
-        upload: hello/hello
+      # - artifacts#v1.9.4:
+      #   # upload: "${HELLO_APP}"
+      #   upload: hello/hello
       - *docker
 
   # # Block the build to require manual user input before proceeding
