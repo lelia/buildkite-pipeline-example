@@ -24,7 +24,7 @@ steps
       - text: "Your name"
         key: "name-input"
         default: "Lelia"
-  
+
   # Pass user input to unit tests and upload the results as an artifact
   - label: ":golang: unit tests"
     key: "unit-tests"
