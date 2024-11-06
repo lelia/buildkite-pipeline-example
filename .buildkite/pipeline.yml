@@ -4,15 +4,15 @@ agents:
 
 # Define common environment variables
 env:
-  # GO_IMAGE: "golang:1.18.10"
+  GO_IMAGE: "golang:1.18.10"
   HELLO_APP: "hello/hello"
-  # NAME_INPUT: "$(buildkite-agent meta-data get name-input)"
+  NAME_INPUT: "$(buildkite-agent meta-data get name-input)"
   TEST_RESULTS: "junit.xml"
 
 # Add YAML anchor for Docker plugin logic
 docker: &docker
   docker#v5.11.0:
-    image: golang:1.18.10
+    image: $$GO_IMAGE
     mount-buildkite-agent: true
     propagate-environment: true
 
@@ -22,10 +22,12 @@ steps:
   - label: ":hammer_and_wrench: build + upload"
     key: "build-upload"
     command: |
-      go build -o ${HELLO_APP} ${HELLO_APP}.go
+      go build -o $$HELLO_APP $$HELLO_APP.go
+    # go build -o ${HELLO_APP} ${HELLO_APP}.go
     plugins:
       - artifacts#v1.9.4:
-        upload: "${HELLO_APP}"
+        # upload: "${HELLO_APP}"
+        upload: $$HELLO_APP
       - *docker
 
   # # Block the build to require manual user input before proceeding
