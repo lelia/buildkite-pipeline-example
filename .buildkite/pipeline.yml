@@ -30,7 +30,8 @@ steps:
     key: "build-upload"
     command: |
       go build -o hello/hello hello/hello.go
-      ls -la ./hello
+      chmod +x ./hello/hello
+      ./hello/hello "Lelia"
     # go build -o ${HELLO_APP} ${HELLO_APP}.go
     plugins:
       - artifacts#v1.9.4:
