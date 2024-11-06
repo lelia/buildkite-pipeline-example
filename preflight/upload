@@ -4,4 +4,4 @@ set -eou pipefail
 
 echo -e "$(cat ./preflight/preflight.yml)\n$(cat .buildkite/pipeline.yml)" > .buildkite/pipeline.yml
 
-buildkite-agent pipeline upload .buildkite/pipeline.yml
+# buildkite-agent pipeline upload .buildkite/pipeline.yml
