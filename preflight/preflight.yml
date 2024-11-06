@@ -17,6 +17,6 @@ env:
 # Add YAML anchor for Docker plugin logic
 docker: &docker
   docker#v5.11.0:
-    image: ${GO_IMAGE}
+    image: $GO_IMAGE
     mount-buildkite-agent: true
     propagate-environment: true

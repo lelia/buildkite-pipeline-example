@@ -8,10 +8,10 @@ steps:
   - label: ":hammer_and_wrench: build + upload"
     key: "build-upload"
     command: |
-      go build -o ${HELLO_APP} ${HELLO_APP}.go
+      go build -o $HELLO_APP $HELLO_APP.go
     plugins:
       - artifacts#v1.9.4:
-          upload: "${HELLO_APP}"
+          upload: "$HELLO_APP"
           s3-upload-acl: public-read
       - *docker
 
@@ -48,10 +48,9 @@ steps:
     key: "run-app"
     depends_on: "input-block"
     command: |
-      chmod +x ./${HELLO_APP}
-      ./${HELLO_APP} ${NAME_INPUT}
+      chmod +x ./$HELLO_APP
+      ./$HELLO_APP $NAME_INPUT
     plugins:
       - artifacts#v1.9.4:
-        download: "${HELLO_APP}"
-        s3-upload-acl: public-read
+        download: "$HELLO_APP"
       - *docker
