@@ -32,6 +32,9 @@ steps:
       go install gotest.tools/gotestsum@v1.12.0
       gotestsum --junitfile ${TEST_RESULTS}
     plugins:
+      - test-collector#v1.10.2:
+          files: "${TEST_RESULTS}"
+          format: "junit"
       - artifacts#v1.9.4:
           upload: "${TEST_RESULTS}"
       - *docker
@@ -62,8 +65,8 @@ steps:
     depends_on: "run-app"
     command: |
       cat << EOF | buildkite-agent annotate --style "success"
-        :wave: Hello, ${NAME_INPUT}! Mission accomplished :tada:
-        <br> :package: Noteworthy artifacts:
-        * <b><a href="artifact://${TEST_RESULTS}">Golang test results</a></b>
+        :wave: Hello, <b>${NAME_INPUT}</b>! Mission accomplished :tada:
+        <p><p> :artifactory: Some noteworthy artifacts:
         * <b><a href="artifact://${HELLO_APP}">Hello program binary</a></b>
+        * <b><a href="artifact://${TEST_RESULTS}">Golang test results</a></b>
       EOF
