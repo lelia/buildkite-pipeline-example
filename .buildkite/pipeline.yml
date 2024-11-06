@@ -61,7 +61,7 @@ steps:
     key: "pipeline-annotate"
     depends_on: "run-app"
     command: |
-      if [ $$(buildkite-agent step get "outcome" --step "validation-check") == "passed" ]; then
+      if [ $$(buildkite-agent step get "outcome" --step "run-app") == "passed" ]; then
         cat <<- EOF | buildkite-agent annotate --style "success"
           :wave: Hello, ${NAME_INPUT}! Mission accomplished :tada:
           <br> :package: Noteworthy artifacts:
