@@ -36,12 +36,10 @@ steps:
           upload: "${TEST_RESULTS}"
       - *docker
 
-  # Annotate the pipeline with golang test results
-  - label: ":junit: annotate pipeline"
+  # Annotate build if any golang tests fail
+  - label: ":junit: annotate tests"
     key: "junit-annotate"
     depends_on: "golang-tests"
-    command: |
-      cat "${TEST_RESULTS}" | buildkite-agent annotate --style "success"
     plugins:
       - junit-annotate#v2.5.0:
           artifacts: "${TEST_RESULTS}"
@@ -57,3 +55,17 @@ steps:
       - artifacts#v1.9.4:
           download: "${HELLO_APP}"
       - *docker
+
+# Annotate pipeline after program successfully executes
+  - label: ":buildkite: annotate pipeline"
+    key: "pipeline-annotate"
+    depends_on: "run-app"
+    command: |
+      if [ $$(buildkite-agent step get "outcome" --step "validation-check") == "passed" ]; then
+        cat <<- EOF | buildkite-agent annotate --style "success"
+          :wave: Hello, ${NAME_INPUT}! Mission accomplished :tada:
+          <br> :package: Noteworthy artifacts:
+          * <b><a href="artifact://${TEST_RESULTS}">Golang test results</a></b>
+          * <b><a href="artifact://${HELLO_APP}">Hello program binary</a></b>
+        EOF
+      fi
