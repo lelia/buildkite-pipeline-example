@@ -1,5 +1,4 @@
----
-# This preflight stores common pipeline configuration and environment variables used throughout `pipeline.yml`
+# This preflight file stores common pipeline configuration and environment variables used throughout `pipeline.yml`
 # With the `upload` helper script, the content of `preflight.yml` is concatenated with `pipeline.yml` to create a unified pipeline
 #
 # Ref: https://forum.buildkite.community/t/any-way-to-make-all-pipelines-inherit-common-pipeline-configuration/2898/2

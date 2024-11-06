@@ -1,8 +1,6 @@
----
-# Buildkite pipeline for https://github.com/lelia/buildkite-pipeline-example
+# Buildkite pipeline for: https://github.com/lelia/buildkite-pipeline-example
 #
-# This pipeline stores its common configuration and environment variables in a `preflight` directory
-# The `preflight.yml` logic is then concatenated with `pipeline.yml` to create a unified pipeline
+# Note: This pipeline stores its common configuration in the `preflight` directory
 
 # Define the main pipeline steps
 steps:
