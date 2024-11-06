@@ -64,5 +64,5 @@ steps:
         :wave: Hello, <b>${NAME_INPUT}</b>! Mission accomplished :tada:<br />
         <br />:artifactory: Some noteworthy artifacts:<br />
         * <b><a href="artifact://${HELLO_APP}">Hello program binary</a></b><br />
-        * <b><a href="artifact://${TEST_RESULTS}">Golang test results</a></b><br />
+        * <b><a href="artifact://${TEST_RESULTS}">Golang test results</a></b>
       EOF
