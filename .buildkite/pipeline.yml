@@ -15,15 +15,15 @@ steps:
           s3-upload-acl: public-read
       - *docker
 
-  # # Block the build to require manual user input before proceeding
-  # - block: ":name_badge: input name"
-  #   key: "input-block"
-  #   depends_on: "build-upload"
-  #   prompt: ":wave: Enter your name to proceed:"
-  #   fields:
-  #     - text: "Your name"
-  #       key: "name-input"
-  #       default: "Lelia"
+  # Block the build to require manual user input before proceeding
+  - block: ":name_badge: input name"
+    key: "input-block"
+    depends_on: "build-upload"
+    prompt: ":wave: Enter your name to proceed:"
+    fields:
+      - text: "Your name"
+        key: "name-input"
+        default: "Lelia"
   
   # # Pass user input to unit tests and upload the results as an artifact
   # - label: ":golang: unit tests"
