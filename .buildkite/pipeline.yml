@@ -9,12 +9,19 @@ agents:
 #   NAME_INPUT: "$(buildkite-agent meta-data get name-input)"
 #   TEST_RESULTS: "junit.xml"
 
-# Add YAML anchor for Docker plugin logic
-docker: &docker
-  docker#v5.11.0:
-    image: golang:1.18.10
-    mount-buildkite-agent: true
-    propagate-environment: true
+common:
+  - docker: &docker
+      docker#v5.11.0:
+        image: golang:1.18.10
+        mount-buildkite-agent: true
+        propagate-environment: true
+
+# # Add YAML anchor for Docker plugin logic
+# docker: &docker
+#   docker#v5.11.0:
+#     image: golang:1.18.10
+#     mount-buildkite-agent: true
+#     propagate-environment: true
 
 # Define the Buildkite pipeline steps
 steps:
