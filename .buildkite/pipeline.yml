@@ -30,8 +30,12 @@ steps:
     key: "build-upload"
     command: |
       go build -o hello/hello hello/hello.go
+      ls -la ./hello
     # go build -o ${HELLO_APP} ${HELLO_APP}.go
     plugins:
+      - artifacts#v1.9.4:
+          upload: "hello/hello"
+          s3-upload-acl: public-read
       # - artifacts#v1.9.4:
       #   # upload: "${HELLO_APP}"
       #   upload: hello/hello
